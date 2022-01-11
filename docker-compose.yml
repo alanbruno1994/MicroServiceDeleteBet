@@ -1,0 +1,32 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    privileged: true
+    volumes:
+      - .:/home/node/app
+      - /home/node/app/node_modules
+    ports:
+      - 5500:5500
+    depends_on:
+      - ms
+  adminer:
+    image: adminer
+    ports:
+      - 8081:8080
+    depends_on:
+      - ms
+  ms:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: rootPassword
+      POSTGRES_DB: ms_base
+      POSTGRES_USER: root      
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432  
+
