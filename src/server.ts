@@ -1,5 +1,6 @@
 import { Kafka } from "kafkajs";
 import app from "./config/app";
+const ShootBet = require("./lib/Queue");
 
 const kafka = new Kafka({
   clientId: "ms_service",
@@ -12,12 +13,12 @@ app.listen(process.env.PORT, async () => {
   try {
     await consumer.connect();
 
-    await consumer.subscribe({ topic: "aprovedbet_delete_client" });
+    await consumer.subscribe({ topic: "bet_delete" });
 
     await consumer.run({
       eachMessage: async ({ topic, partition, message }) => {
         const object = JSON.parse(String(message.value));
-        console.log("Reciver:  ", object);
+        ShootBet.add(object);
       },
     });
   } catch (error) {}
