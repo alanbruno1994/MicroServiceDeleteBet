@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       user_id: DataTypes.INTEGER,
       game_id: DataTypes.INTEGER,
-      number_chose: DataTypes.STRING,
+      number_choose: DataTypes.STRING,
       price_game: DataTypes.FLOAT,
     },
     {

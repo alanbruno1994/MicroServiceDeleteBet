@@ -1,7 +1,7 @@
 "use strict";
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("Bets", {
+    await queryInterface.createTable("bets", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -16,8 +16,9 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      number_chose: {
+      number_choose: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       price_game: {
         type: Sequelize.FLOAT,
@@ -34,6 +35,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable("Bets");
+    await queryInterface.dropTable("bets");
   },
 };
