@@ -12,12 +12,16 @@ services:
       - 5500:5500
     depends_on:
       - ms
+    networks:
+      - microservice-proxy-net
   adminer:
     image: adminer
     ports:
       - 8081:8080
     depends_on:
       - ms
+    networks:
+      - microservice-proxy-net
   ms:
     image: postgres
     restart: always
@@ -28,5 +32,10 @@ services:
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
     ports:
-      - 5432:5432  
-
+      - 5432:5432
+    networks:
+      - microservice-proxy-net    
+networks:
+  microservice-proxy-net:
+    external:
+      name: custom_network 
