@@ -34,7 +34,13 @@ services:
     ports:
       - 5432:5432
     networks:
-      - microservice-proxy-net    
+      - microservice-proxy-net
+  redis:
+    image: redis
+    ports:
+      - '6379:6379'
+    networks:
+      - microservice-proxy-net   
 networks:
   microservice-proxy-net:
     external:
