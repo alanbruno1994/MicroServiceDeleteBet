@@ -1,3 +1,4 @@
+import { v4 } from "uuid";
 const db = require("../database/models/index");
 require("dotenv").config();
 const Bull = require("bull");
@@ -12,9 +13,9 @@ const ShootBet = new Bull("ShootBet", {
 
 ShootBet.process(async (job, done) => {
   try {
-    await db.Bets.create(job.data);
+    await db.Bets.create({ ...job.data, secured_id: v4() });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 
   done();
