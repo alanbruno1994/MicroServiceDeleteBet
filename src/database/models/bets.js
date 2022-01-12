@@ -8,6 +8,10 @@ module.exports = (sequelize, DataTypes) => {
       game_id: DataTypes.INTEGER,
       number_choose: DataTypes.STRING,
       price_game: DataTypes.FLOAT,
+      secured_id: {
+        type: DataTypes.UUIDV4,
+        allowNull: false,
+      },
     },
     {
       sequelize,
