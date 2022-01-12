@@ -11,7 +11,12 @@ const ShootBet = new Bull("ShootBet", {
 });
 
 ShootBet.process(async (job, done) => {
-  await db.Bets.create(job.data);
+  try {
+    await db.Bets.create(job.data);
+  } catch (error) {
+    console.log(error);
+  }
+
   done();
 });
 
