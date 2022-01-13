@@ -4,7 +4,9 @@ import bcrypt, { genSalt } from "bcrypt";
 import { graphqlHTTP } from "express-graphql";
 import { v4 } from "uuid";
 import middlewareUser from "../middleware/authMiddlware";
-const db = require("../database/models/index");
+import { Bets } from "../database/models/bets";
+import { User } from "../database/models/user";
+// const db = require("../database/models/index");
 
 require("dotenv").config();
 
@@ -39,11 +41,11 @@ const schema = buildSchema(`
 
 const root = {
   bets: async () => {
-    return db.Bets.findAll();
+    return Bets.findAll();
   },
   bet: async (value: { id: number }) => {
     // Aqui vem como objeto
-    return db.Bets.findOne({ where: { id: value.id } });
+    return Bets.findOne({ where: { id: value.id } });
   },
   createUser: async (data: {
     email: string;
@@ -57,7 +59,7 @@ const root = {
       secured_id: v4(),
     };
     console.log(insert);
-    return db.User.create(insert);
+    return User.create(insert);
   },
 };
 

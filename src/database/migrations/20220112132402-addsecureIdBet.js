@@ -5,7 +5,7 @@ module.exports = {
     return queryInterface.addColumn("bets", "secured_id", {
       type: Sequelize.UUID,
       defaultValue: Sequelize.UUIDV4,
-      allowNull: false,
+      allowNull: true,
     });
   },
 
